@@ -1,0 +1,307 @@
+%Dette er utf8 udgaven af latex-templaten. Den er til brug på systemer der kører utf8x, såsom linux. Hvis du bruger windows, så er det letteste at hente windowsudgaven i stedet, da den i forvejen er gemt i latin1 format og har dette sat i inputenc. Hvis du ikke benytter danske tegn (æ,ø,å), så er det lige meget.
+%
+% Loader dokumentklassen memoir. Sætter sproget i dokumentet til dansk, papirtypen til A4, sætter dokument til lige store højre og venstre margen, laver to søjler og siger at vi gerne vil lave en artikel, sætter skriftstørrelse til 9pt.
+\documentclass[english,a4paper,oneside,article,9pt]{memoir}
+\usepackage[english]{babel}		%Giver mulighed for dansk orddeling. Slet kun hvis du VED hvad du laver, eller skal skrive noget på engelsk.
+\usepackage[utf8x]{inputenc}	%Hvis du benytter windows i stedet for linux, så skift utf8 ud med latin1. Tillader danske tegn.
+\usepackage{graphicx}		%Tillader indsættelse af billeder
+\usepackage{mathtools}		%Ekstra matematik... bare lad den være, du får muligvis brug for den.
+\usepackage{siunitx}	%Bruges til at indsætte SI enheder med makroer. Sørger for at de kommer til at stå med rigtig skrifttype (normal skrift i matematik). Brug den, eller lad være. ² indsættes med \squaren for at undgå sammenfald med \square fra ams.
+\sisetup{separate-uncertainty=true}
+%\usepackage{url}		 %bruges til at formattere url'er... kan sagtens udelades.
+%\usepackage[monochrome]{color}
+%\usepackage[colorlinks=true]{hyperref}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{microtype} % Pakke der proever at fikse badbox problemer. Kun kompatibel med pdflatex.
+% For at indstille margin:
+%			        left right ratio
+
+\setlrmarginsandblock{1.6cm}{1.6cm}{*} % Hvor stjerne betyder udfyldes "automatisk".
+\setlength{\oddsidemargin}{-1cm} %giver mere plads på siden
+
+%\pagestyle{simple} %Giver tom footer og sidetal i header
+\pagestyle{fancy}
+\usepackage[colorlinks=false]{hyperref}
+\hypersetup{colorlinks=false}
+\title{Non-linear air resistance:\\
+the Schrödinger equation agrees.}
+
+\author{Frederik M. Jørgensen,\\
+
+% \thanks{email: Walkingwaffles@gmail.com} \\ %Forfatter 1
+ %Forfatter 2
+} 
+
+
+\date{\today} %Dato. Kan evt. ændres, hvis I ikke har lavet rapporten idag.
+
+
+%% Det følgende er sidehovedet på første siden. LEG IKKE MED DETTE.
+%\makepagestyle{topbox}
+%\makeoddhead{topbox}{\textbf{Modtaget dato:} \newline  (forbeholdt instruktor) \newline \vspace{1cm} \qquad} {\begin{flushright} \textbf{Godkendt: \newline 
+%Dato: \newline 
+%Underskrift: \newline} \end{flushright}}
+%SLUT BOKS
+\begin{document}
+
+
+%Indsætter title og sidehoved
+\maketitle
+
+%\thispagestyle{topbox} %% Dette er boksen i toppen af foerste side. Den kan genindfoeres ved at udkommentere denne linje samt de fem linjer ovenfor.
+%\saythanks %siger tak, det vil sige at den her skriver din email nederst på siden\\
+
+%
+%\begin{onecolabstract}
+%\end{onecolabstract}
+%\tableofcontents
+\twocolumn
+\chapter{Introduction and motivation}
+This presents two ways of solving a differential equation: One long and difficult and fun, and one that has been done a million times.\\
+All in all, this is just what I do when I'm bored, and it provided a nice little escape from the dullness of daily life.
+
+
+\chapter{Let's do math}
+Consider an object dropped with gravitational acceleration $-g$, with air resistance to 2nd order. Inferring on the velocity, v, that $v\leq 0$ gives the following differential equation:
+\begin{align*}
+\frac{d}{dt} v=-g+c_1v+c_2v^2\\
+c_1\leq 0\\
+c_2>0
+\end{align*}
+We will end up with a solution that governs both positive and negative v, but only the $v\leq 0$ case represents physical motion of the object.
+
+The equation can be rewritten as to a simpler form:
+\begin{align*}
+\frac{d}{dt}v=-g+c_1v+c_2v^2\\
+=a(v-v_0)^2-b=av^2+av_0^2-2av_0v-b+av_0^2\\
+c_2=a\\
+c_1=-2av_0=-2c_2v_0\\
+\Rightarrow -\frac{c_1}{2c_2}=v_0\\
+-g=-b+\frac{c_1^2}{4c_2}\\
+\Rightarrow -b=-\frac{c_1^2}{4c_2}-g\\
+\frac{d}{dt} v=\frac{d}{dt}(v-v_0)=a(v-v_0)^2-b\\
+v_1=v-v_0\\
+\frac{d}{dt} v_1=av_1^2-b\\
+v_2=av_1\\
+\frac{d}{dt} v_1=\frac{1}{a}\frac{d}{dt} v_2=a\frac{1}{a^2}v_2^2-b\\
+\frac{d}{dt} v_2=v_2^2-ab\\
+ab=\frac{c^2}{4}\\
+\frac{d}{dt} v_2=(v_2+\frac{c}{2})(v_2-\frac{c}{2})\\
+v_3=v_2-\frac{c}{2}\\
+\frac{d}{dt} v_2=\frac{d}{dt}(v_2-\frac{c}{2})=\frac{d}{dt} v_3=(v_3+c)v_3
+\end{align*}
+Let's make a rundown of our current definitions:
+\begin{align*}
+c=2\sqrt{c_2(\frac{c_1^2}{4c_2}+g)}=\sqrt{c_1^2+4c_2g}\\
+v_3=v_2-\frac{c}{2}=av_2-\frac{c}{2}=a(v-v_0)-\frac{c}{2}\\
+=c_2(v+\frac{c_1}{2c_2})-\frac{1}{2}\sqrt{c_1^2+4c_2g}\\
+=c_2v-\frac{1}{2}(-c_1+\sqrt{c_1^2+4c_2g})
+\end{align*}
+For now, we will deal with c as a positive root.\\
+Let's make another definition:
+\begin{align*}
+v_3=\frac{d}{dt}x_3\tag{$x_3$ is transformed position}\\
+\end{align*}
+From which we get:
+\begin{align*}
+\frac{d}{dt} v_3=(v_3+c)v_3=\frac{d}{dt}Ae^{x_3+ct}\\
+\Rightarrow v_3=Ae^{x_3+ct}\\
+\Rightarrow \frac{d}{dt} v_3=(Ae^{x_3+ct}+c)Ae^{x_3+ct}
+\end{align*}
+We can, however, apply the differential operator again:
+\begin{align*}
+\frac{d^2}{dt^2}v_3=\frac{d}{dt}(v_3^2+cv_3)=2v_3\frac{d}{dt} v_3+c\frac{d}{dt} v_3\\
+=(2v_3+c)\frac{d}{dt} v_3=\frac{d}{dt}Be^{2x_3+ct}\\
+\Rightarrow Be^{2x_3+ct}=A(Ae^{x_3+ct}+c)e^{x_3+ct}
+\end{align*}
+This is a boundary on which functions are allowed for $x_3$.
+\begin{align*}
+Be^{2x_3+ct}-Ae^{x_3+ct}(Ae^{x_3+ct}+c)=0\\
+\frac{B}{A}e^{x_3}-(Ae^{x_3+ct}+c)=0\\
+(\frac{B}{A}-Ae^{ct})e^{x_3}=c\\
+c=e^{x_3}\frac{B}{A}(1-\frac{A^2}{B}e^{ct})\\
+\frac{Ac}{B}=e^{x_3}(1-\frac{A^2}{B}e^{ct})\\
+=C=e^{x_3}(1-Ke^{ct})
+\end{align*}
+In order for this to not break at some point in time, $C>0$, and $K=-k<0$, such that:
+\begin{align*}
+C=e^{x_3}(1+ke^{ct})\\
+e^{x_3}=\frac{C}{1+ke^{ct}}\\
+x_3=ln(C)-ln(1+ke^{ct})
+\end{align*}
+Let us confirm that this satisfies our differential equation:
+\begin{align*}
+\frac{d}{dt}x_3=v_3=-\frac{cke^{ct}}{1+ke^{ct}}\\
+\frac{d}{dt} v_3=(-\frac{cke^{ct}}{1+ke^{ct}})^2-\frac{c^2ke^{ct}}{1+ke^{ct}}\\
+=v_3^2+cv_3
+\end{align*}
+Thanks to our transformations, this is the simplest it's going to look. Let's transform back now.\\
+We know that multiplying the velocity with a constant is equivalent with multiplying the position with that constant, and making an offset on the velocity is equivalent to adding a linear function in time to the position.\\
+Let us take the positive value of c\\
+\begin{align*}
+v_3=c_2v-\frac{1}{2}(-c_1+\sqrt{c_1^2+4c_2g})\\
+\Rightarrow x_3=c_2x-\frac{1}{2}(-c_1+\sqrt{c_1^2+4c_2g})t\\
+x=\frac{x_3+\frac{1}{2}(-c_1+\sqrt{c_1^2+4c_2g})t}{c_2}\\
+=\frac{1}{c_2}(ln(C)-ln(1+ke^{ct}))+\frac{1}{2c_2}(-c_1+\sqrt{c_1^2+4c_2g})t\\
+=\gamma-\frac{1}{c_2}ln(1+ke^{t\sqrt{c_1^2+4c_2g}})+\frac{1}{2c_2}(-c_1+\sqrt{c_1^2+4c_2g})t
+\end{align*}
+Let's make our boundary conditions such that $x(0)=0$:
+\begin{align*}
+&x(0)=\gamma-\frac{1}{c_2}ln(1+k)=0\\
+&\gamma=\frac{1}{c_2}ln(1+k)\\
+&x=\frac{1}{c_2}ln(1+k)-\frac{1}{c_2}ln(1+ke^{t\sqrt{c_1^2+4c_2g}})\\
+&+\frac{1}{2c_2}(\sqrt{c_1^2+4c_2g}-c_1)t
+\end{align*}
+Let's make our boundary condition for the velocity $v(0)=0$:
+\begin{align*}
+v=-\frac{1}{c_2}\frac{\sqrt{c_1^2+4c_2g}ke^{t\sqrt{c_1^2+4c_2g}}}{1+ke^{t\sqrt{c_1^2+4c_2g}}}+\frac{1}{2c_2}(\sqrt{c_1^2+4c_2g}-c_1)\\
+v(0)=-\frac{1}{c_2}\frac{\sqrt{c_1^2+4c_2g}k}{1+k}+\frac{1}{2c_2}(\sqrt{c_1^2+4c_2g}-c_1)=0\\
+\frac{1}{2\sqrt{c_1^2+4c_2g}}(\sqrt{c_1^2+4c_2g}-c_1)=\frac{k}{1+k}\\
+=\frac{k+1-1}{k+1}=1-\frac{1}{1+k}\\
+=\frac{1}{2}(1-\frac{c_1}{\sqrt{c_1^2+4c_2g}})\\
+-\frac{1}{1+k}=-\frac{1}{2}(1+\frac{c_1}{\sqrt{c_1^2+4c_2g}})\\
+k=\frac{2}{1+\frac{c_1}{\sqrt{c_1^2+4c_2g}}}-1
+\end{align*}
+On k, we must remind the reader that the analytical solution only holds for all t if $k\geq0$, so that
+\begin{align*}
+\frac{2}{1+\frac{c_1}{c}}\geq 1
+\end{align*}
+Since $\sqrt{c_1^2+4c_2g}\geq|c_1|$, and $c_1<0$, the inequality holds.\\
+
+\section{On maximal speed and boundary conditions:}
+It is obvious that extrema in the velocity are obtained when
+\begin{align*}
+\frac{d}{dt} v=0=-g+c_1v+c_2v^2\\
+v_\pm=\frac{1}{2c_2}(-c_1\pm\sqrt{c_1^2+4gc_2})
+\end{align*}
+In the case that $c_1=-c_2=-1$:
+\begin{align*}
+v_\pm=\frac{1}{2}(1\pm\sqrt{1+4*9.82})
+\end{align*}
+which is either $3.67$ or $-2.67$.
+Since the former is un-physical, as our differential equation is only valid for $v\leq 0$ because it would otherwise imply that the non-linear term $c_2v^2$ would accelerate the object upwards in the direction of motion when moving upwards, which is absurd, our function must converge to the negative value.\\
+Consider then, if one travelled with a speed, $|v_0|$ greater than 2.67 downwards, by having initially accelerated faster than gravity, and then seizing that acceleration. Then there must exist a function that takes us from $v_0$ to $-2.67$, that also satisfies the differential equation.\\
+Let us set up the boundary condition: $v(0)=v_0<v_{-}$, where $v_-$ is the final velocity, and let us maintain that the resulting equation is only valid for $v\leq 0$.\\
+If we try to infer our previous rule, that $k\geq 0$, we see that this is obviously not the case for all $\delta$, and thus not all $v_0$, and thus we have the question: If we permit k to be a negative number, how does x look?
+We have accepted the notation of $c=\sqrt{c_1^2+4gc_2}$, meaning that we can write our equation:
+\begin{align*}
+v(t)=-\frac{kce^{ct}}{c_2(1+ke^{ct})}+v_+\\
+=-\frac{c}{c_2}(1-\frac{1}{1+ke^{ct}})+v_+=\frac{c}{c_2(1+ke^{ct})}+v_-\\
+\end{align*}
+if $v(0)=v_0$:
+\begin{align*}
+v_0-v_-=\frac{c}{c_2}\frac{1}{1+k}\\
+1+k=\frac{c}{c_2(v_0-v_-)}\tag{assuming $v_0\neq v_-$}\\
+k=\frac{c}{c_2(v_0-v_-)}-1
+\end{align*}
+Of course, we see here that positive k \textit{necessitate} $v_0>v_-$, which is not the case that we are interested in.\\
+for $0>k=-K$, there is a pole at
+\begin{align*}
+Ke^{c\tau}=1\\
+ln(K)+c\tau=0\\
+\tau=-\frac{ln(K)}{c}\\
+\end{align*}
+which must give positive $\tau$ for $K<1$:
+\begin{align*}
+K=\frac{c}{c_2(v_--v_0)}+1<1\\
+\Rightarrow v_0>v_-
+\end{align*}
+which is, again, not what we're interested in. The resulting function, however, does reproduce a convergence towards $v_-$, as can easily be seen from the equation as the denominator in the equation for v(t) goes to zero exponentially fast and leaves a constant velocity, $v_-$.
+Of course, this means that we cannot have x solved as:
+\begin{align*}
+x=\frac{1}{c_2}(ln(C)-ln(1+ke^{ct}))+\frac{1}{2c_2}(-c_1+\sqrt{c_1^2+4c_2g})t\\
+=\frac{1}{c_2}(ln(C)-ln(1+ke^{ct}))+v_+t
+\end{align*}
+anymore, as we are now in a region where $1+k<0$. We must make the following subtle change, as we cannot take the logarithm of a negative number:
+\begin{align*}
+x=\frac{1}{c_2}ln(\frac{C}{1+ke^{ct}})+v_+t
+\end{align*}
+where we can set C to fulfil $x(0)=0$ for $C=k+1$, to finally have:
+\begin{align*}
+x=\frac{1}{c_2}ln(\frac{1+k}{1+ke^{ct}})+v_+t
+\end{align*}
+Further translation must necessarily give $x\rightarrow x+x_0$, due to the translation symmetry of position in the differential equation.
+
+
+\chapter{It's the Schrödinger equation again}
+The Schrödinger equation, which governs the energy E of a quantum system with wavefunction $\psi$, and potential V, looks as such:
+\begin{align*}
+-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial z^2}\psi+V\psi=E\psi\\
+\end{align*}
+or with a rewriting:
+\begin{align*}
+U=\frac{2m}{\hbar^2}(E-V)\\
+\frac{\partial^2}{\partial z^2}\psi=-U\psi
+\end{align*}
+
+It's concluded that if $\psi=A*e^{-F}$, and $\frac{\partial}{\partial z}F=f$,it can be rewritten as:
+\begin{align*}
+(f^2-\frac{\partial f}{\partial z})\psi=-U\psi\\
+\Rightarrow \frac{\partial}{\partial z}f=U+f^2,
+\end{align*}
+which is somewhat similar to the initial equation for non-linear air resistance, if $U=-g,\ c_2=1,\ c_1=0$.\\
+If U=-g, the situation corresponds to a bound state, which could naively be solved by $f=\pm\sqrt{g}$, and one wouldn't care much about this case. Taking the long way around, however, was a fun little pass time. The solution of the Schrödinger equation must be a linear combination of the two solutions.\\
+\\
+Now that we have solved the initial differential equation, it is of interest to look at the solution to the aforementioned equation. It is obvious that it is solved by exponential functions:
+\begin{align*}
+\frac{\partial^2}{\partial z^2}e^{\pm\sqrt{-U}z}=-Ue^{\pm\sqrt{-U}z},
+\end{align*}
+and therefore:
+\begin{align*}
+\frac{\partial^2}{\partial z^2}(ae^{\sqrt{-U}z}+be^{-\sqrt{-U}z})=-U(ae^{\sqrt{-U}z}+be^{-\sqrt{-U}z})
+\end{align*}
+for all a and b, as explained.
+\\
+In fact, if we make the definitions:
+\begin{align*}
+F=-x(t)\\
+z=t\\
+c_2=1\\
+c_1=0
+\end{align*}
+we would have
+\begin{align*}
+c=\sqrt{4g}\\
+v_\pm=\pm\sqrt{g}=\pm\frac{c}{2}\\
+\psi(z)=A\frac{1+ke^{cz}}{1+k}e^{-v_+z}\\
+=A\frac{1+ke^{2v_+z}}{1+k}e^{-v_+z}=\frac{A}{1+k}(e^{-v_+z}+ke^{v_+z})\\
+=\frac{A}{1+k}(e^{v_-z}+ke^{v_+z})\\
+=\frac{A}{1+k}(e^{-\sqrt{g}z}+ke^{\sqrt{g}z})
+\end{align*}
+Which is a linear combination to the two exponential solutions, as expected.
+
+
+
+\chapter{In conclusion:}
+The differential equation:
+\begin{align*}
+\frac{d}{dt} v=-g+c_1v+c_2v^2=\frac{d^2}{dt^2}x
+\end{align*}
+governing the motion with speed $v\leq 0$ relative to the air or a non-linear, resistive medium, through a field of constant negative acceleration with air resistance to second order, where $c_1\leq 0$, $c_2>0$, can be solved by the equations where $x(0)=x_0,\ v(0)=v_0$:
+\begin{align*}
+x(t)=x_0+\frac{1}{c_2}ln(\frac{1+k}{1+ke^{ct}})+v_+t\\
+v(t)=\frac{c}{c_2}\frac{1}{(1+ke^{ct})}+v_-\\
+k=\frac{c}{c_2}\frac{1}{(v_0-v_-)}-1\\
+c=\sqrt{c_1^2+4gc_2}\\
+v_\pm=\frac{1}{2c_2}(\pm c-c_1)
+\end{align*}
+Giving the full, horribly incomprehensive, unabridged "why would you ever want these" equations for position and velocity, that spill into the other column:
+\begin{align*}
+x(t)=x_0+\frac{1}{c_2}ln\left(\frac{1}{\frac{c_2v_0+\frac{1}{2}c_1}{\sqrt{c_1^2+4gc_2}}+\frac{1}{2}+(1-\frac{c_2v_0+\frac{1}{2}c_1}{\sqrt{c_1^2+4gc_2}}+\frac{1}{2})e^{t\sqrt{c_1^2+4gc_2}}}\right)+\frac{1}{2c_2}(\sqrt{c_1^2+4gc_2}-c_1)t\\
+v(t)=\frac{\sqrt{c_1^2+4gc_2}}{c_2}\frac{1}{1+\left(\frac{1}{\frac{c_2v_0+\frac{1}{2}c_1}{\sqrt{c_1^2+4gc_2}}+\frac{1}{2}}-1\right)e^{t\sqrt{c_1^2+4gc_2}}}-\frac{1}{2c_2}(\sqrt{c_1^2+4gc_2}+c_1)t
+\end{align*}
+Worth noticing is that $v_0$ is in the definition of k and does not appear as an externally added parameter. This is because v is not the object's speed relative to the observer, but relative to the air.\\
+This is reflected by the differential equation lacking translation symmetry for velocity. It does maintain the symmetry for position, so spatial coordinates are still arbitrarily chosen.\\
+\\
+The equations above will show that, as expected, any initial velocity will converge towards $v_-$ as time goes to infinity, but they do only have physical meaning for $v\leq 0$ and, of course, $v\neq v_\pm$.\\
+In the physically significant regime, negative values of k correspond to $v_0<v_-$, and positive correspond to $v_0>v_-$, while $k=0$ means $v_0=v_-$.\\
+\\
+On the Schrödinger equation, this has proven itself to be a wonderful excursion into the consistency of mathematics, and has shown that there are multiple ways of solving a problem, while giving an excursion away from boredom. It does present an interesting question, however:\\
+Can more interesting systems be solved with solutions to the Schrödinger equation?
+
+
+
+
+
+\end{document}
