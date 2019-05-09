@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.2.23)  9 MAY 2019 18:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.2.23)  9 MAY 2019 21:27
 entering extended mode
 **"./Nonlinear air resistance - the Schrödinger equation agrees.tex"
 ("Nonlinear air resistance - the Schrödinger equation agrees.tex"
@@ -1187,12 +1187,12 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 307.
  ) 
 Here is how much of TeX's memory you used:
  23076 strings out of 493303
- 425684 string characters out of 3129784
+ 425860 string characters out of 3129784
  568247 words of memory out of 3000000
  26369 multiletter control sequences out of 15000+200000
  539595 words of font info for 88 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,12n,43p,10449b,759s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 43i,12n,43p,10449b,767s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/Makla/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmbx10.pfb><C:/Users/Makla/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cmextra/cmex9.pfb><C:/Users/Makla/AppData/Local/Programs/MiKTeX 2
@@ -1212,7 +1212,7 @@ fb><C:/Users/Makla/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmsy9.pfb><C:/Users/Makla/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmti9.pfb>
 Output written on "Nonlinear air resistance - the Schrödinger equation agrees.
-pdf" (5 pages, 194802 bytes).
+pdf" (5 pages, 194915 bytes).
 PDF statistics:
  113 PDF objects out of 1000 (max. 8388607)
  13 named destinations out of 1000 (max. 500000)
